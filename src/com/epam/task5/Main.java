@@ -7,14 +7,13 @@ package com.epam.task5;
 public class Main {
     public static void main(String[] args) {
         Counter counter1 = new Counter();
-        Counter counter2 = new Counter(0, 10, -10);
+        Counter counter2 = new Counter(0, -100, 100);
         Counter counter3 = new Counter(-100, -10, 10);
 
         System.out.println("Before increase/decrease:");
-
-        view(counter1);
-        view(counter2);
-        view(counter3);
+        counter1.view();
+        counter2.view();
+        counter3.view();
 
         for (int i = 0; i < 100; i++) {
             counter1.increase();
@@ -22,14 +21,8 @@ public class Main {
         }
 
         System.out.println("\nAfter increase/decrease:");
-
-        view(counter1);
-        view(counter2);
-        view(counter3);
-    }
-
-    public static void view(Counter counter) {
-        System.out.println("min/current/max: " + counter.getMinLimit() + "/" + counter.getCurrentState() + "/" +
-                counter.getMaxLimit());
+        counter1.view();
+        counter2.view();
+        counter3.view();
     }
 }

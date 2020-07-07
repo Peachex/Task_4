@@ -1,9 +1,9 @@
 package com.epam.task5;
 
 public class Counter {
-    private int currentState;
-    private int maxLimit;
-    private int minLimit;
+    private int currentState = 0;
+    private int minLimit = 0;
+    private int maxLimit = 0;
 
     public Counter() {
         this.currentState = 0;
@@ -11,23 +11,11 @@ public class Counter {
         this.minLimit = -10;
     }
 
-    public Counter(int currentState, int maxLimit, int minLimit) {
-        if (maxLimit >= minLimit) {
-            this.maxLimit = maxLimit;
-        } else {
-            this.maxLimit = minLimit;
-        }
-
-        if (minLimit <= maxLimit) {
-            this.minLimit = minLimit;
-        } else {
-            this.minLimit = maxLimit;
-        }
-
-        if (currentState >= this.minLimit && currentState <= this.maxLimit) {
+    public Counter(int currentState, int minLimit, int maxLimit) {
+        if (minLimit <= maxLimit && currentState >= minLimit && currentState <= maxLimit) {
             this.currentState = currentState;
-        } else {
-            this.currentState = (this.minLimit + this.maxLimit) / 2;
+            this.minLimit = minLimit;
+            this.maxLimit = maxLimit;
         }
     }
 
@@ -43,15 +31,9 @@ public class Counter {
         }
     }
 
-    public int getCurrentState() {
-        return currentState;
-    }
-
-    public int getMaxLimit() {
-        return maxLimit;
-    }
-
-    public int getMinLimit() {
-        return minLimit;
+    public void view() {
+        System.out.println(
+                "min/current/max: " + this.minLimit + "/" + this.currentState + "/" + this.maxLimit
+        );
     }
 }
