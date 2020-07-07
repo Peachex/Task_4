@@ -3,7 +3,7 @@ package com.epam.task3;
 public class Student {
     private String name;
     private int groupNumber;
-    private int[] marksArray = new int[5];
+    private int[] marksArray;
 
     public Student(String name, int groupNumber, int[] marksArray) {
         this.name = name;
@@ -11,15 +11,39 @@ public class Student {
         this.marksArray = marksArray;
     }
 
-    public String getName() {
-        return this.name;
+    public boolean isExcellentStudent() {
+        for (int mark : this.marksArray) {
+            if (mark != 9 && mark != 10) {
+                return false;
+            }
+        }
+        return true;
     }
 
-    public int getGroupNumber() {
-        return this.groupNumber;
+    public static void viewExcellentStudents(Student[] studentsArray) {
+        for (Student student : studentsArray) {
+            if (student.isExcellentStudent()) {
+                student.viewStudent();
+            }
+        }
     }
 
-    public int[] getMarksArray() {
-        return this.marksArray;
+    public static void viewAllStudents(Student[] studentsArray) {
+        for (Student student : studentsArray) {
+            student.viewStudent();
+        }
+    }
+
+    public void viewStudent() {
+        System.out.println("\nName: " + this.name + "\t");
+        System.out.println("Group number: " + this.groupNumber + "\t");
+
+        System.out.print("Marks: ");
+        for (int mark : this.marksArray) {
+            System.out.print(mark + " ");
+        }
+
+        System.out.println();
     }
 }
+
