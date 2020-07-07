@@ -19,8 +19,8 @@ public class Main {
         view(test2, false);
     }
 
-    public static void view(Test2 test2, boolean flag) {
-        if (flag) {
+    public static void view(Test2 test2, boolean isDefault) {
+        if (isDefault) {
             System.out.println("default: a = " + test2.getA());
             System.out.println("default: b = " + test2.getB() + "\n");
         } else {
