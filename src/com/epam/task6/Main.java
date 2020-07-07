@@ -10,8 +10,8 @@ public class Main {
         Time time2 = new Time(33, 66, 99);
 
         System.out.println("Default time:");
-        view(time1);
-        view(time2);
+        time1.viewTime();
+        time2.viewTime();
 
         time1.setHours(0);
         time1.setMinutes(1);
@@ -22,11 +22,19 @@ public class Main {
         time2.setSeconds(0);
 
         System.out.println("\nSet time:");
-        view(time1);
-        view(time2);
-    }
+        time1.viewTime();
+        time2.viewTime();
 
-    public static void view(Time time) {
-        System.out.println(time.getHours() + "h " + time.getMinutes() + "min " + time.getSeconds() + "s");
+        time1.changeTimeHours(1);
+        time1.changeTimeMinutes(65);
+        time1.changeTimeSeconds(190);
+
+        time2.changeTimeHours(1);
+        time2.changeTimeMinutes(60);
+        time2.changeTimeSeconds(3600);
+
+        System.out.println("\nChanged time: ");
+        time1.viewTime();
+        time2.viewTime();
     }
 }
