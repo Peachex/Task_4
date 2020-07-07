@@ -1,5 +1,6 @@
 package com.epam.task4;
 
+import java.time.LocalTime;
 import java.util.Scanner;
 
 /* 4. Создайте класс Train, содержащий поля: название пункта назначения, номер поезда, время отправления.
@@ -11,26 +12,26 @@ public class Main {
     public static void main(String[] args) {
         Scanner in = new Scanner(System.in);
 
-        Train[] trainsArray = new Train[5];
-
-        trainsArray[0] = new Train("Minsk", 2, new Time(19, 15, 43));
-        trainsArray[1] = new Train("Vitebsk", 5, new Time(10, 39, 10));
-        trainsArray[2] = new Train("Mogilev", 3, new Time(9, 45, 31));
-        trainsArray[3] = new Train("Vitebsk", 1, new Time(8, 23, 46));
-        trainsArray[4] = new Train("Minsk", 4, new Time(16, 54, 23));
+        Train[] trainsArray = {
+                new Train("Minsk", 2, LocalTime.of(19, 15, 43)),
+                new Train("Vitebsk", 5, LocalTime.of(10, 39, 10)),
+                new Train("Mogilev", 3, LocalTime.of(9, 45, 31)),
+                new Train("Vitebsk", 1, LocalTime.of(8, 23, 46)),
+                new Train("Minsk", 4, LocalTime.of(16, 54, 23)),
+        };
 
         System.out.println("\nAll trains: ");
-        ViewAction.viewTrains(trainsArray);
+        Train.viewAllTrains(trainsArray);
 
         System.out.println("\nInput train number to see information about this train: ");
-        ViewAction.viewTrain(trainsArray, TrainLogic.findTrainIndex(trainsArray, in.nextInt()));
+        Train.findTrainByNumber(trainsArray, in.nextInt());
 
         System.out.println("\nSort by number: ");
-        TrainLogic.sortByNumber(trainsArray);
-        ViewAction.viewTrains(trainsArray);
+        Train.sortByNumber(trainsArray);
+        Train.viewAllTrains(trainsArray);
 
         System.out.println("\nSort by destination: ");
-        TrainLogic.sortByDestination(trainsArray);
-        ViewAction.viewTrains(trainsArray);
+        Train.sortByDestination(trainsArray);
+        Train.viewAllTrains(trainsArray);
     }
 }
