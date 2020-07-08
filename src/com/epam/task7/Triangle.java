@@ -5,66 +5,54 @@ public class Triangle {
     private Point b;
     private Point c;
 
-    private double sideAB;
-    private double sideBC;
-    private double sideAC;
-
-    private double perimeter;
-    private double square;
-    private Point mediansCrossPoint;
-
-    Triangle(Point a, Point b, Point c) {
+    public Triangle(Point a, Point b, Point c) {
         this.a = a;
         this.b = b;
         this.c = c;
 
-        Calculation calculate = new Calculation();
-            sideAB = calculate.findSide(a, b);
-            sideBC = calculate.findSide(b, c);
-            sideAC = calculate.findSide(a, c);
-
-        if (calculate.checkTriangle(this)) {
+        if (!this.isExist()) {
             throw new IllegalArgumentException("Triangle doesn't exist!");
         }
-
-            perimeter = calculate.findPerimeter(this);
-            square = calculate.findSquare(this);
-            mediansCrossPoint = calculate.findMediansCrossPoint(this);
     }
 
-    public double getSideAB() {
-        return sideAB;
+    public double findSide(Point point1, Point point2) {
+        return Math.sqrt(Math.pow(point1.getX() - point2.getX(), 2) + Math.pow(point1.getY() - point2.getY(), 2));
     }
 
-    public double getSideBC() {
-        return sideBC;
+    public double findPerimeter() {
+        return findSide(a, b) + findSide(b, c) + findSide(a, c);
     }
 
-    public double getSideAC() {
-        return sideAC;
+    public double findSquare() {
+        double p = (findSide(a, b) + findSide(b, c) + findSide(a, c)) / 2;
+
+        return Math.sqrt(p * (p - findSide(a, b)) * (p - findSide(b, c)) * (p - findSide(a, c)));
     }
 
-    public Point getA() {
-        return a;
+    public Point findMediansCrossPoint() {
+        double x = (this.a.getX() + this.b.getX() + this.c.getX()) / 3;
+        double y = (this.a.getY() + this.b.getY() + this.c.getY()) / 3;
+
+        return new Point(x, y);
     }
 
-    public Point getB() {
-        return b;
+    public boolean isExist() {
+        return ((findSide(a, b) + findSide(b, c) > findSide(a, c)) && (findSide(b, c) + findSide(a, c) >
+                findSide(a, b)) && (findSide(a, c) + findSide(a, b) > findSide(b, c)));
     }
 
-    public Point getC() {
-        return c;
-    }
+    public void viewTriangle() {
+        System.out.println("point A(" + this.a.getX() + ";" + this.a.getY() + ")");
+        System.out.println("point B(" + this.b.getX() + ";" + this.b.getY() + ")");
+        System.out.println("point C(" + this.c.getX() + ";" + this.c.getY() + ")");
 
-    public double getPerimeter() {
-        return perimeter;
-    }
+        System.out.println("\nAB = " + findSide(a, b));
+        System.out.println("BC = " + findSide(b, c));
+        System.out.println("AC = " + findSide(a, c));
 
-    public double getSquare() {
-        return square;
-    }
-
-    public Point getMediansCrossPoint() {
-        return mediansCrossPoint;
+        System.out.println("\nAB + BC + AC = " + findPerimeter());
+        System.out.println("Square = " + findSquare());
+        System.out.println("M(" + findMediansCrossPoint().getX() + ";" + findMediansCrossPoint().getY() +
+                ") - medians cross point");
     }
 }
