@@ -1,13 +1,20 @@
 package com.epam.task12;
 
 public class Wheel {
-    private int wheelsNumber;
+    private static int count = 1;
+    private String wheelName;
+    private int wheelId;
 
-    public Wheel(int wheelsNumber) {
-        this.wheelsNumber = wheelsNumber;
+    public Wheel(String wheelName) {
+        this.wheelName = wheelName;
+        this.wheelId = count++;
     }
 
-    public String toString() {
-        return "Wheels number: " + this.wheelsNumber + "\n";
+    public String getWheelName() {
+        return this.wheelName;
+    }
+
+    public int getWheelId() {
+        return this.wheelId;
     }
 }
