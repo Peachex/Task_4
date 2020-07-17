@@ -15,18 +15,24 @@ public class Client {
         for (BankAccount bankAccount : this.bankAccounts) {
             if (bankAccount.getAccountNumber() == accountNumber) {
                 bankAccount.setBlock(true);
-                System.out.println("Blocked successfully.");
+                System.out.println("\nBlocked successfully.");
+                return;
             }
         }
+
+        System.out.println("\nCouldn't find...");
     }
 
     public void unlockAccount(long accountNumber) {
         for (BankAccount bankAccount : this.bankAccounts) {
             if (bankAccount.getAccountNumber() == accountNumber) {
                 bankAccount.setBlock(false);
-                System.out.println("Unlocked successfully");
+                System.out.println("\nUnlocked successfully");
+                return;
             }
         }
+
+        System.out.println("\nCouldn't find...");
     }
 
     public double findTotalBalance() {
@@ -65,7 +71,7 @@ public class Client {
             }
         }
 
-        System.out.println("Couldn't find...");
+        System.out.println("\nCouldn't find...");
     }
 
     public void sortAccountsByBalance() {

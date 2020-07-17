@@ -59,6 +59,10 @@ public class Main {
                 case 7: {
                     return;
                 }
+
+                default: {
+                    System.out.println("\nCouldn't find...");
+                }
             }
         }
     }
