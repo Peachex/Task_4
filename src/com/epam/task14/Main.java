@@ -8,10 +8,10 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
         Client client = new Client("John White", 25,
-                new BankAccount(111_222_333, 190),
-                new BankAccount(999_888_777, -1700),
-                new BankAccount(444_666_555, 2600),
-                new BankAccount(111_111_111, -12));
+                new BankAccount(1111_2222_3333_4444L, 190),
+                new BankAccount(9999_8888_7777_1111L, -1700),
+                new BankAccount(4444_6666_5555_4444L, 2600),
+                new BankAccount(1111_1111_1111_1111L, -12));
 
         Scanner in = new Scanner(System.in);
 
