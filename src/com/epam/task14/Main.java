@@ -51,8 +51,8 @@ public class Main {
                 }
 
                 case 6: {
-                    System.out.println("Sorted accounts:");
-                    client.sortAccountsByBalance();
+                    System.out.println("Sorted accounts:\n1)From min to max.\n2)From max to min.");
+                    client.sortAccountsByBalance(in.nextInt() == 1);
                     break;
                 }
 

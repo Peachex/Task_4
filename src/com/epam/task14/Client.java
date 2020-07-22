@@ -1,6 +1,6 @@
 package com.epam.task14;
 
-public class Client {
+public class Client implements Cloneable {
     private String clientName;
     private int clientAge;
     private BankAccount[] bankAccounts;
@@ -74,37 +74,35 @@ public class Client {
         System.out.println("\nCouldn't find...");
     }
 
-    public void sortAccountsByBalance() {
-        int[] indexArray = new int[this.bankAccounts.length];
-        double[] balanceArray = new double[this.bankAccounts.length];
-
-        for (int i = 0; i < this.bankAccounts.length; i++) {
-            balanceArray[i] = this.bankAccounts[i].getAccountBalance();
-            indexArray[i] = i;
-        }
+    public void sortAccountsByBalance(boolean fromMinToMax) {
+        BankAccount[] bankAccountsClone = this.bankAccounts.clone();
 
         boolean flag = true;
 
         while (flag) {
             flag = false;
 
-            for (int i = 0; i < this.bankAccounts.length - 1; i++) {
-                if (balanceArray[i] < balanceArray[i + 1]) {
-                    double balance = balanceArray[i];
-                    balanceArray[i] = balanceArray[i + 1];
-                    balanceArray[i + 1] = balance;
-
-                    int temp = indexArray[i];
-                    indexArray[i] = indexArray[i + 1];
-                    indexArray[i + 1] = temp;
-
-                    flag = true;
+            for (int i = 0; i < bankAccountsClone.length - 1; i++) {
+                if (fromMinToMax) {
+                    if (bankAccountsClone[i].getAccountBalance() > bankAccountsClone[i + 1].getAccountBalance()) {
+                        BankAccount bankAccount = bankAccountsClone[i];
+                        bankAccountsClone[i] = bankAccountsClone[i + 1];
+                        bankAccountsClone[i + 1] = bankAccount;
+                        flag = true;
+                    }
+                } else {
+                    if (bankAccountsClone[i].getAccountBalance() < bankAccountsClone[i + 1].getAccountBalance()) {
+                        BankAccount bankAccount = bankAccountsClone[i];
+                        bankAccountsClone[i] = bankAccountsClone[i + 1];
+                        bankAccountsClone[i + 1] = bankAccount;
+                        flag = true;
+                    }
                 }
             }
         }
 
-        for (int i = 0; i < bankAccounts.length; i++) {
-            System.out.println(bankAccounts[indexArray[i]]);
+        for (BankAccount bankAccount : bankAccountsClone) {
+            System.out.println(bankAccount);
         }
     }
 
@@ -121,5 +119,9 @@ public class Client {
         System.out.println("Positive balance: " + this.findPositiveBalance());
         System.out.println("Negative balance: " + this.findNegativeBalance());
         System.out.println("Total balance: " + this.findTotalBalance());
+    }
+
+    public Object clone() throws CloneNotSupportedException {
+        return super.clone();
     }
 }
