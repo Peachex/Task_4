@@ -91,21 +91,18 @@ public class Main {
                     int toggle2 = in.nextInt();
 
                     System.out.println("\n1)From min to max.\n2)From max to min.\n");
-                    int toggle3 = in.nextInt();
-
                     if (toggle2 == 1) {
-                        travelAgency.sortVouchersByPrice(toggle3 == 1);
+                        travelAgency.sortVouchersByPrice(in.nextInt() == 1);
 
                     } else {
                         if (toggle2 == 2) {
-                            travelAgency.sortVouchersByDaysNumber(toggle3 == 1);
+                            travelAgency.sortVouchersByDaysNumber(in.nextInt() == 1);
                         } else {
                             if (toggle2 == 3) {
-                                travelAgency.sortVouchersByEatingTimesNumber(toggle3 == 1);
+                                travelAgency.sortVouchersByEatingTimesNumber(in.nextInt() == 1);
                             }
                         }
                     }
-
                     break;
                 }
 

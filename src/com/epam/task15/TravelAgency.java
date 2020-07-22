@@ -1,6 +1,6 @@
 package com.epam.task15;
 
-public class TravelAgency {
+public class TravelAgency implements Cloneable {
     TravelVoucher[] travelVouchers;
 
     public TravelAgency(TravelVoucher... travelVouchers) {
@@ -40,122 +40,100 @@ public class TravelAgency {
     }
 
     public void sortVouchersByEatingTimesNumber(boolean fromMinToMax) {
-        int[] indexArray = new int[this.travelVouchers.length];
-        int[] eatingTimesNumberArray = new int[this.travelVouchers.length];
-
-        for (int i = 0; i < eatingTimesNumberArray.length; i++) {
-            eatingTimesNumberArray[i] = this.travelVouchers[i].getEatingTimesNumber();
-            indexArray[i] = i;
-        }
+        TravelVoucher[] travelVouchersClone = this.travelVouchers.clone();
 
         boolean flag = true;
 
         while (flag) {
             flag = false;
 
-            for (int i = 0; i < eatingTimesNumberArray.length - 1; i++) {
+            for (int i = 0; i < travelVouchersClone.length - 1; i++) {
                 if (fromMinToMax) {
-                    if (eatingTimesNumberArray[i] > eatingTimesNumberArray[i + 1]) {
-                        swap(eatingTimesNumberArray, i);
-                        swap(indexArray, i);
+                    if (travelVouchersClone[i].getEatingTimesNumber() >
+                            travelVouchersClone[i + 1].getEatingTimesNumber()) {
+
+                        swap(travelVouchersClone, i);
                         flag = true;
                     }
                 } else {
-                    if (eatingTimesNumberArray[i] < eatingTimesNumberArray[i + 1]) {
-                        swap(eatingTimesNumberArray, i);
-                        swap(indexArray, i);
+                    if (travelVouchersClone[i].getEatingTimesNumber() <
+                            travelVouchersClone[i + 1].getEatingTimesNumber()) {
+
+                        swap(travelVouchersClone, i);
                         flag = true;
                     }
                 }
             }
         }
 
-        for (int i = 0; i < eatingTimesNumberArray.length; i++) {
-            System.out.println(this.travelVouchers[indexArray[i]]);
+        for (TravelVoucher travelVoucher : travelVouchersClone) {
+            System.out.println(travelVoucher);
         }
     }
 
     public void sortVouchersByDaysNumber(boolean fromMinToMax) {
-        int[] indexArray = new int[this.travelVouchers.length];
-        int[] daysNumberArray = new int[this.travelVouchers.length];
-
-        for (int i = 0; i < daysNumberArray.length; i++) {
-            daysNumberArray[i] = this.travelVouchers[i].getDaysNumber();
-            indexArray[i] = i;
-        }
+        TravelVoucher[] travelVouchersClone = this.travelVouchers.clone();
 
         boolean flag = true;
 
         while (flag) {
             flag = false;
 
-            for (int i = 0; i < daysNumberArray.length - 1; i++) {
+            for (int i = 0; i < travelVouchersClone.length - 1; i++) {
                 if (fromMinToMax) {
-                    if (daysNumberArray[i] > daysNumberArray[i + 1]) {
-                        swap(daysNumberArray, i);
-                        swap(indexArray, i);
+                    if (travelVouchersClone[i].getDaysNumber() > travelVouchersClone[i + 1].getDaysNumber()) {
+                        swap(travelVouchersClone, i);
                         flag = true;
                     }
                 } else {
-                    if (daysNumberArray[i] < daysNumberArray[i + 1]) {
-                        swap(daysNumberArray, i);
-                        swap(indexArray, i);
+                    if (travelVouchersClone[i].getDaysNumber() < travelVouchersClone[i + 1].getDaysNumber()) {
+                        swap(travelVouchersClone, i);
                         flag = true;
                     }
                 }
             }
         }
 
-        for (int i = 0; i < daysNumberArray.length; i++) {
-            System.out.println(this.travelVouchers[indexArray[i]]);
+        for (TravelVoucher travelVoucher : travelVouchersClone) {
+            System.out.println(travelVoucher);
         }
     }
 
     public void sortVouchersByPrice(boolean fromMinToMax) {
-        int[] indexArray = new int[this.travelVouchers.length];
-        double[] pricesArray = new double[this.travelVouchers.length];
-
-        for (int i = 0; i < pricesArray.length; i++) {
-            pricesArray[i] = this.travelVouchers[i].getVoucherPrice();
-            indexArray[i] = i;
-        }
+        TravelVoucher[] travelVouchersClone = this.travelVouchers.clone();
 
         boolean flag = true;
 
         while (flag) {
             flag = false;
 
-            for (int i = 0; i < pricesArray.length - 1; i++) {
+            for (int i = 0; i < travelVouchersClone.length - 1; i++) {
                 if (fromMinToMax) {
-                    if (pricesArray[i] > pricesArray[i + 1]) {
-                        swap(pricesArray, i);
-                        swap(indexArray, i);
+                    if (travelVouchersClone[i].getVoucherPrice() > travelVouchersClone[i + 1].getVoucherPrice()) {
+                        swap(travelVouchersClone, i);
                         flag = true;
                     }
                 } else {
-                    if (pricesArray[i] < pricesArray[i + 1]) {
-                        swap(pricesArray, i);
-                        swap(indexArray, i);
+                    if (travelVouchersClone[i].getVoucherPrice() < travelVouchersClone[i + 1].getVoucherPrice()) {
+                        swap(travelVouchersClone, i);
                         flag = true;
                     }
                 }
             }
         }
 
-        for (int i = 0; i < pricesArray.length; i++) {
-            System.out.println(this.travelVouchers[indexArray[i]]);
+        for (TravelVoucher travelVoucher : travelVouchersClone) {
+            System.out.println(travelVoucher);
         }
     }
 
-    public void swap(int[] array, int i) {
-        int number = array[i];
-        array[i] = array[i + 1];
-        array[i + 1] = number;
+    public void swap(TravelVoucher[] travelVouchersArray, int i) {
+        TravelVoucher travelVoucher = travelVouchersArray[i];
+        travelVouchersArray[i] = travelVouchersArray[i + 1];
+        travelVouchersArray[i + 1] = travelVoucher;
     }
 
-    public void swap(double[] array, int i) {
-        double number = array[i];
-        array[i] = array[i + 1];
-        array[i + 1] = number;
+    public Object clone() throws CloneNotSupportedException {
+        return super.clone();
     }
 }
