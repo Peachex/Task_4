@@ -18,7 +18,8 @@ public class Main {
         car.turnEngineOn();
         car.drive();
 
-        car.changeWheel(1);
+        Wheel oldWheel = car.changeWheel(1, "Extra wheel");
+        System.out.println("\nOld wheel:\n" + oldWheel);
 
         car.setCarName("BMW");
         car.viewCarName();

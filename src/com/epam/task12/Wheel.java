@@ -14,7 +14,19 @@ public class Wheel {
         return this.wheelName;
     }
 
+    public void setWheelName(String wheelName) {
+        this.wheelName = wheelName;
+    }
+
     public int getWheelId() {
         return this.wheelId;
+    }
+
+    public void setWheelId(int wheelId) {
+        this.wheelId = wheelId;
+    }
+
+    public String toString() {
+        return "Wheel name: " + this.wheelName + "\nWheel id: " + this.wheelId;
     }
 }
