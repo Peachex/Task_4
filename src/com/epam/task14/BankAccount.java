@@ -1,33 +1,45 @@
 package com.epam.task14;
 
-public class BankAccount {
-    private long accountNumber;
+public class BankAccount implements Cloneable {
+    private String accountNumber;
     private double accountBalance;
-    private boolean block;
+    private boolean isBlock;
 
-    public BankAccount(long accountNumber, double accountBalance) {
+    public BankAccount(String accountNumber, double accountBalance) {
         this.accountNumber = accountNumber;
         this.accountBalance = accountBalance;
     }
 
-    public long getAccountNumber() {
+    public String getAccountNumber() {
         return this.accountNumber;
+    }
+
+    public void setAccountNumber(String accountNumber) {
+        this.accountNumber = accountNumber;
     }
 
     public double getAccountBalance() {
         return this.accountBalance;
     }
 
-    public boolean isBlock() {
-        return this.block;
+    public void setAccountBalance(double accountBalance) {
+        this.accountBalance = accountBalance;
     }
 
-    public void setBlock(boolean block) {
-        this.block = block;
+    public boolean isBlock() {
+        return this.isBlock;
+    }
+
+    public void setBlock(boolean isBlock) {
+        this.isBlock = isBlock;
     }
 
     public String toString() {
         return "\nAccount number: " + this.accountNumber + "\nAccount balance: " + this.accountBalance + "\nAccount status: " +
-                (this.block ? "blocked" : "unlocked");
+                (this.isBlock ? "blocked" : "unlocked");
+    }
+
+    public Object clone() throws CloneNotSupportedException {
+        return super.clone();
     }
 }

@@ -1,6 +1,9 @@
 package com.epam.task14;
 
-public class Client implements Cloneable {
+import java.util.Arrays;
+import java.util.Comparator;
+
+public class Client {
     private String clientName;
     private int clientAge;
     private BankAccount[] bankAccounts;
@@ -11,27 +14,25 @@ public class Client implements Cloneable {
         this.bankAccounts = bankAccounts;
     }
 
-    public void blockAccount(long accountNumber) {
+    public void blockAccount(String accountNumber) {
         for (BankAccount bankAccount : this.bankAccounts) {
-            if (bankAccount.getAccountNumber() == accountNumber) {
+            if (bankAccount.getAccountNumber().equals(accountNumber)) {
                 bankAccount.setBlock(true);
                 System.out.println("\nBlocked successfully.");
                 return;
             }
         }
-
         System.out.println("\nCouldn't find...");
     }
 
-    public void unlockAccount(long accountNumber) {
+    public void unlockAccount(String accountNumber) {
         for (BankAccount bankAccount : this.bankAccounts) {
-            if (bankAccount.getAccountNumber() == accountNumber) {
+            if (bankAccount.getAccountNumber().equals(accountNumber)) {
                 bankAccount.setBlock(false);
                 System.out.println("\nUnlocked successfully");
                 return;
             }
         }
-
         System.out.println("\nCouldn't find...");
     }
 
@@ -41,66 +42,43 @@ public class Client implements Cloneable {
 
     public double findPositiveBalance() {
         double positiveBalance = 0;
-
         for (BankAccount bankAccount : this.bankAccounts) {
             if (!bankAccount.isBlock() && bankAccount.getAccountBalance() > 0) {
                 positiveBalance += bankAccount.getAccountBalance();
             }
         }
-
         return positiveBalance;
     }
 
     public double findNegativeBalance() {
         double negativeBalance = 0;
-
         for (BankAccount bankAccount : this.bankAccounts) {
             if (!bankAccount.isBlock() && bankAccount.getAccountBalance() < 0) {
                 negativeBalance += bankAccount.getAccountBalance();
             }
         }
-
         return negativeBalance;
     }
 
-    public void findAccountByNumber(long accountNumber) {
+    public void findAccountByNumber(String accountNumber) {
         for (BankAccount bankAccount : this.bankAccounts) {
-            if (bankAccount.getAccountNumber() == accountNumber) {
+            if (bankAccount.getAccountNumber().equals(accountNumber)) {
                 System.out.println(bankAccount);
                 return;
             }
         }
-
         System.out.println("\nCouldn't find...");
     }
 
     public void sortAccountsByBalance(boolean fromMinToMax) {
         BankAccount[] bankAccountsClone = this.bankAccounts.clone();
-
-        boolean flag = true;
-
-        while (flag) {
-            flag = false;
-
-            for (int i = 0; i < bankAccountsClone.length - 1; i++) {
-                if (fromMinToMax) {
-                    if (bankAccountsClone[i].getAccountBalance() > bankAccountsClone[i + 1].getAccountBalance()) {
-                        BankAccount bankAccount = bankAccountsClone[i];
-                        bankAccountsClone[i] = bankAccountsClone[i + 1];
-                        bankAccountsClone[i + 1] = bankAccount;
-                        flag = true;
-                    }
-                } else {
-                    if (bankAccountsClone[i].getAccountBalance() < bankAccountsClone[i + 1].getAccountBalance()) {
-                        BankAccount bankAccount = bankAccountsClone[i];
-                        bankAccountsClone[i] = bankAccountsClone[i + 1];
-                        bankAccountsClone[i + 1] = bankAccount;
-                        flag = true;
-                    }
-                }
+        Arrays.sort(bankAccountsClone, new Comparator<BankAccount>() {
+            @Override
+            public int compare(BankAccount a1, BankAccount a2) {
+                int result = Double.compare(a1.getAccountBalance(), a2.getAccountBalance());
+                return (fromMinToMax ? 1 : -1) * result;
             }
-        }
-
+        });
         for (BankAccount bankAccount : bankAccountsClone) {
             System.out.println(bankAccount);
         }
@@ -119,9 +97,5 @@ public class Client implements Cloneable {
         System.out.println("Positive balance: " + this.findPositiveBalance());
         System.out.println("Negative balance: " + this.findNegativeBalance());
         System.out.println("Total balance: " + this.findTotalBalance());
-    }
-
-    public Object clone() throws CloneNotSupportedException {
-        return super.clone();
     }
 }

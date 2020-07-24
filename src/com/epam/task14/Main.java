@@ -8,58 +8,49 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
         Client client = new Client("John White", 25,
-                new BankAccount(1111_2222_3333_4444L, 190),
-                new BankAccount(9999_8888_7777_1111L, -1700),
-                new BankAccount(4444_6666_5555_4444L, 2600),
-                new BankAccount(1111_1111_1111_1111L, -12));
+                new BankAccount("1111222233334444", 190),
+                new BankAccount("9999888877771111", -1700),
+                new BankAccount("4444666655554444", 2600),
+                new BankAccount("1234567898765432", -12));
 
         Scanner in = new Scanner(System.in);
 
         while (true) {
             System.out.println("\n1)View information.\n2)Unlock account.\n3)Block account.\n4)Check balance.\n5)Find account." +
                     "\n6)Sort accounts.\n7)Exit.\n");
-            int toggle = in.nextInt();
-
-            switch (toggle) {
+            switch (in.nextInt()) {
                 case 1: {
                     client.printClientAccounts();
                     System.out.println();
                     break;
                 }
-
                 case 2: {
                     System.out.println("Input account number to unlock this account: ");
-                    client.unlockAccount(in.nextLong());
+                    client.unlockAccount(in.next());
                     break;
                 }
-
                 case 3: {
                     System.out.println("Input account number to block this account: ");
-                    client.blockAccount(in.nextLong());
+                    client.blockAccount(in.next());
                     break;
                 }
-
                 case 4: {
                     client.printBalance();
                     break;
                 }
-
                 case 5: {
                     System.out.println("Input account number to find this account: ");
-                    client.findAccountByNumber(in.nextLong());
+                    client.findAccountByNumber(in.next());
                     break;
                 }
-
                 case 6: {
                     System.out.println("Sorted accounts:\n1)From min to max.\n2)From max to min.");
                     client.sortAccountsByBalance(in.nextInt() == 1);
                     break;
                 }
-
                 case 7: {
                     return;
                 }
-
                 default: {
                     System.out.println("\nCouldn't find...");
                 }
