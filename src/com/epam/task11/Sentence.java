@@ -1,15 +1,26 @@
 package com.epam.task11;
 
 public class Sentence {
-    private StringBuilder sentence = new StringBuilder();
+    private Word[] words;
 
     public Sentence(Word... words) {
-        for (Word word : words) {
-            this.sentence.append(word);
-        }
+        this.words = words;
     }
 
+    public Word[] getWords() {
+        return this.words;
+    }
+
+    public void setWords(Word[] words) {
+        this.words = words;
+    }
+
+
     public String toString() {
-        return this.sentence + ".";
+        StringBuilder sb = new StringBuilder();
+        for (Word word : this.words) {
+            sb.append(word);
+        }
+        return sb.toString() + ".";
     }
 }

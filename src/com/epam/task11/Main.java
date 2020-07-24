@@ -18,7 +18,9 @@ public class Main {
         System.out.println("\nBefore adding:");
         text.viewText();
 
-        text.addSentences(new Sentence(new Word("This"), new Word("sentence"), new Word("was"), new Word("added")));
+        text.addSentences(
+                new Sentence(new Word("This"), new Word("sentence"), new Word("was"), new Word("added")),
+                new Sentence(new Word("This"), new Word("sentence"), new Word("was"), new Word("added"), new Word("too")));
 
         System.out.println("\nAfter adding:");
         text.viewText();
