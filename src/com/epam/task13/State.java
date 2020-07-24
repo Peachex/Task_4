@@ -2,23 +2,42 @@ package com.epam.task13;
 
 public class State {
     private String stateName;
+    private City capital;
     private Region[] regions;
-    private double stateArea;
 
-    public State(String stateName, Region... regions) {
+
+    public State(String stateName, City capitalCity, Region... regions) {
         this.stateName = stateName;
+        this.capital = capitalCity;
+        this.regions = regions;
+    }
+
+    public String getStateName() {
+        return this.stateName;
+    }
+
+    public void setStateName(String stateName) {
+        this.stateName = stateName;
+    }
+
+    public City getCapital() {
+        return this.capital;
+    }
+
+    public void setCapital(City capital) {
+        this.capital = capital;
+    }
+
+    public Region[] getRegions() {
+        return this.regions;
+    }
+
+    public void setRegions(Region[] regions) {
         this.regions = regions;
     }
 
     public void printCapitalCity() {
-        for (Region region : this.regions) {
-            for (District district : region.getDistricts()) {
-                if (district.getCity().isCapitalCity()) {
-                    System.out.println("Capital city: " + district.getCity().getCityName());
-                    return;
-                }
-            }
-        }
+        System.out.println("Capital: " + this.capital);
     }
 
     public void printNumberOfRegions() {
@@ -30,20 +49,17 @@ public class State {
     }
 
     public double findStateArea() {
+        double stateArea = 0;
         for (Region region : this.regions) {
-            this.stateArea += region.getRegionArea();
+            stateArea += region.getRegionArea();
         }
-
-        return this.stateArea;
+        return stateArea;
     }
 
     public void printRegionalCenter() {
         System.out.println("\nRegional center(s): ");
-
         for (Region region : this.regions) {
-            for (District district : region.getDistricts()) {
-                System.out.println(district.getCity().getCityName());
-            }
+            region.printRegionalCenter();
         }
     }
 }

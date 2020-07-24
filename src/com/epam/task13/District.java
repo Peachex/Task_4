@@ -2,14 +2,26 @@ package com.epam.task13;
 
 public class District {
     private String districtName;
-    private City city;
+    private City[] cities;
 
-    public District(String districtName, City city) {
+    public District(String districtName, City... cities) {
         this.districtName = districtName;
-        this.city = city;
+        this.cities = cities;
     }
 
-    public City getCity() {
-        return this.city;
+    public String getDistrictName() {
+        return this.districtName;
+    }
+
+    public void setDistrictName(String districtName) {
+        this.districtName = districtName;
+    }
+
+    public City[] getCities() {
+        return this.cities;
+    }
+
+    public void setCities(City[] cities) {
+        this.cities = cities;
     }
 }
