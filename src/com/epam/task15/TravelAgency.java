@@ -1,6 +1,9 @@
 package com.epam.task15;
 
-public class TravelAgency implements Cloneable {
+import java.util.Arrays;
+import java.util.Comparator;
+
+public class TravelAgency {
     TravelVoucher[] travelVouchers;
 
     public TravelAgency(TravelVoucher... travelVouchers) {
@@ -41,31 +44,13 @@ public class TravelAgency implements Cloneable {
 
     public void sortVouchersByEatingTimesNumber(boolean fromMinToMax) {
         TravelVoucher[] travelVouchersClone = this.travelVouchers.clone();
-
-        boolean flag = true;
-
-        while (flag) {
-            flag = false;
-
-            for (int i = 0; i < travelVouchersClone.length - 1; i++) {
-                if (fromMinToMax) {
-                    if (travelVouchersClone[i].getEatingTimesNumber() >
-                            travelVouchersClone[i + 1].getEatingTimesNumber()) {
-
-                        swap(travelVouchersClone, i);
-                        flag = true;
-                    }
-                } else {
-                    if (travelVouchersClone[i].getEatingTimesNumber() <
-                            travelVouchersClone[i + 1].getEatingTimesNumber()) {
-
-                        swap(travelVouchersClone, i);
-                        flag = true;
-                    }
-                }
+        Arrays.sort(travelVouchersClone, new Comparator<TravelVoucher>() {
+            @Override
+            public int compare(TravelVoucher v1, TravelVoucher v2) {
+                int result = Integer.compare(v1.getEatingTimesNumber(), v2.getEatingTimesNumber());
+                return (fromMinToMax ? 1 : -1) * result;
             }
-        }
-
+        });
         for (TravelVoucher travelVoucher : travelVouchersClone) {
             System.out.println(travelVoucher);
         }
@@ -73,27 +58,13 @@ public class TravelAgency implements Cloneable {
 
     public void sortVouchersByDaysNumber(boolean fromMinToMax) {
         TravelVoucher[] travelVouchersClone = this.travelVouchers.clone();
-
-        boolean flag = true;
-
-        while (flag) {
-            flag = false;
-
-            for (int i = 0; i < travelVouchersClone.length - 1; i++) {
-                if (fromMinToMax) {
-                    if (travelVouchersClone[i].getDaysNumber() > travelVouchersClone[i + 1].getDaysNumber()) {
-                        swap(travelVouchersClone, i);
-                        flag = true;
-                    }
-                } else {
-                    if (travelVouchersClone[i].getDaysNumber() < travelVouchersClone[i + 1].getDaysNumber()) {
-                        swap(travelVouchersClone, i);
-                        flag = true;
-                    }
-                }
+        Arrays.sort(travelVouchersClone, new Comparator<TravelVoucher>() {
+            @Override
+            public int compare(TravelVoucher v1, TravelVoucher v2) {
+                int result = Integer.compare(v1.getDaysNumber(), v2.getDaysNumber());
+                return (fromMinToMax ? 1 : -1) * result;
             }
-        }
-
+        });
         for (TravelVoucher travelVoucher : travelVouchersClone) {
             System.out.println(travelVoucher);
         }
@@ -101,39 +72,15 @@ public class TravelAgency implements Cloneable {
 
     public void sortVouchersByPrice(boolean fromMinToMax) {
         TravelVoucher[] travelVouchersClone = this.travelVouchers.clone();
-
-        boolean flag = true;
-
-        while (flag) {
-            flag = false;
-
-            for (int i = 0; i < travelVouchersClone.length - 1; i++) {
-                if (fromMinToMax) {
-                    if (travelVouchersClone[i].getVoucherPrice() > travelVouchersClone[i + 1].getVoucherPrice()) {
-                        swap(travelVouchersClone, i);
-                        flag = true;
-                    }
-                } else {
-                    if (travelVouchersClone[i].getVoucherPrice() < travelVouchersClone[i + 1].getVoucherPrice()) {
-                        swap(travelVouchersClone, i);
-                        flag = true;
-                    }
-                }
+        Arrays.sort(travelVouchersClone, new Comparator<TravelVoucher>() {
+            @Override
+            public int compare(TravelVoucher v1, TravelVoucher v2) {
+                int result = Double.compare(v1.getVoucherPrice(), v2.getVoucherPrice());
+                return (fromMinToMax ? 1 : -1) * result;
             }
-        }
-
+        });
         for (TravelVoucher travelVoucher : travelVouchersClone) {
             System.out.println(travelVoucher);
         }
-    }
-
-    public void swap(TravelVoucher[] travelVouchersArray, int i) {
-        TravelVoucher travelVoucher = travelVouchersArray[i];
-        travelVouchersArray[i] = travelVouchersArray[i + 1];
-        travelVouchersArray[i + 1] = travelVoucher;
-    }
-
-    public Object clone() throws CloneNotSupportedException {
-        return super.clone();
     }
 }
